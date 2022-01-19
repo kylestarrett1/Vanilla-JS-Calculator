@@ -1,153 +1,150 @@
-const clearAll = document.getElementById("clearAll");
-const plus = document.getElementById("plus");
-const displayResults = document.getElementById("displayResults");
-const screenDisplay = document.querySelector("#displayResults");
-const buttons = document.querySelectorAll("button[id]");
-
-clearAll.addEventListener("click", function () {
-  displayResults.innerHTML = "0";
-});
-
-const clickNumbers = buttons.forEach((btn) => {
-  btn.addEventListener("click", function () {
-    inputNumber(this.innerHTML);
-
-    var currentValue = screenDisplay.innerHTML;
-    console.log(currentValue);
-  });
-});
-
-const inputNumber = (number) => {
-  const screenNumber = screenDisplay.innerHTML;
-  if (screenNumber.length < 16) {
-    // limiting the number that can be inserted so you dont excede the limit and get something like 3.333333333333333e+21
-    screenDisplay.innerHTML = parseInt(screenNumber + number).toString();
+// Shortcut to get elements
+var el = function (element) {
+  if (element.charAt(0) === "#") {
+    // if passed an ID...
+    return document.querySelector(element); // returns single element
   }
+
+  return document.querySelectorAll(element); // Otherwise, returns a nodelist
 };
 
-const addition = plus.addEventListener("click", function () {
-  screenDisplay.innerHTML = 0;
-  const currentValue = screenDisplay.innerHTML;
+// Variables
+var console = console.log;
+var display = el("#display"), // Screen where results are displayed
+  equals = el("#equals"), // Equals button
+  nums = el(".num"), // List of numbers
+  operators = el(".operators"), // List of operators
+  theNum = "", // Current number
+  oldNum = "", // First number
+  resultNum, // Result
+  operator;
 
-  console.log(currentValue);
-});
+// When number is clicked. Get the current number selected
+var setNum = function () {
+  if (resultNum) {
+    // If a result was displayed, reset number
+    theNum = this.getAttribute("data-num");
+    resultNum = "";
+  } else {
+    // Otherwise, add a digit to previous number
+    theNum += this.getAttribute("data-num");
+  }
 
-$("#percentage").tilt({
+  display.innerHTML = theNum; // Display the current number
+  console(theNum);
+};
+
+// When operator is clicked. Pass number to oldNum and save operator
+var moveNum = function () {
+  oldNum = theNum;
+  theNum = "";
+  operator = this.getAttribute("data-operator");
+
+  console(operator);
+  equals.setAttribute("data-result", ""); // Reset result in attribute
+};
+
+//When equals is clicked. Calculate result
+var displayNum = function () {
+  // Convert string input to numbers
+  oldNum = parseFloat(oldNum);
+  theNum = parseFloat(theNum);
+
+  // Perform operation
+  switch (operator) {
+    case "plus":
+      resultNum = oldNum + theNum;
+      break;
+
+    case "minus":
+      resultNum = oldNum - theNum;
+      break;
+
+    case "mult":
+      resultNum = oldNum * theNum;
+      break;
+
+    case "divide":
+      resultNum = oldNum / theNum;
+      break;
+
+    case "percentage":
+      resultNum = oldNum % theNum;
+      break;
+
+    case "sqrd":
+      resultNum = oldNum ** 2;
+      break;
+
+    case "sqrt":
+      resultNum = Math.sqrt(oldNum);
+      break;
+
+    case "reciprocal":
+      resultNum = 1 / oldNum;
+      break;
+
+    case "reverseSign":
+      resultNum = oldNum - oldNum * 2;
+      break;
+
+    // If equal is pressed without an operator, keep number and continue
+    default:
+      resultNum = theNum;
+  }
+
+  // If NaN
+  if (isNaN(resultNum)) {
+    resultNum = "Error";
+  }
+
+  // Display results
+  display.innerHTML = resultNum;
+
+  equals.setAttribute("data-result", resultNum);
+
+  oldNum = 0;
+  theNum = resultNum;
+};
+
+var clearEntry = function () {
+  theNum = "";
+  display.innerHTML = "0";
+  equals.setAttribute("data-result", resultNum);
+};
+
+// When the clear button is pressed. Clear everything
+var clearAll = function () {
+  oldNum = "";
+  theNum = "";
+  display.innerHTML = "0";
+  equals.setAttribute("data-result", resultNum);
+};
+
+/*  The Click Events  */
+
+// Add click event to numbers
+for (var i = 0; i < nums.length; i++) {
+  nums[i].onclick = setNum;
+}
+
+// Add click event to operators
+for (var i = 0; i < operators.length; i++) {
+  operators[i].onclick = moveNum;
+}
+
+// Add click event to equal sign
+equals.onclick = displayNum;
+
+// Add click event to clear entry button
+el("#clearEntry").onclick = clearEntry;
+
+// Add click event to clear button
+el("#clearAll").onclick = clearAll;
+
+/*
+$("").tilt({
   glare: true,
   maxGlare: 0.5,
 });
-
-$("#clearEntry").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#clearAll").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#backSpace").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#reciprocal").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#sqrd").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#sqrt").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#divide").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#seven").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#eight").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#nine").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#mult").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#four").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#five").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#six").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#minus").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#one").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#two").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#three").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#plus").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#negPos").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#zero").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#decimal").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
-
-$("#equals").tilt({
-  glare: true,
-  maxGlare: 0.5,
-});
+*/

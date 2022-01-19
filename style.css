@@ -11,7 +11,9 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  padding: 6px;
+  padding-left: 4px;
+  padding-bottom: 16px;
+  padding-right: 10px;
   transform: translate(-50%, -50%);
 
   grid-template-columns: 25% 25% 25% 25%;
@@ -26,14 +28,16 @@ body {
     "one two three plus"
     "negPos zero decimal equals";
 
-  background-color: rgb(238, 238, 238);
-  border: 1px solid black;
-  box-shadow: 1px 1px 7px gray;
+  grid-gap: 2px;
 
-  grid-gap: 2px 2px;
+  overflow: hidden;
+
+  background-color: rgb(238, 238, 238);
+  border: 1px ridge black;
+  box-shadow: 1px 1px 7px gray;
 }
 
-#displayResults {
+#display {
   font-family: "Helvetica", "Arial";
   font-size: 50px;
   grid-area: dr;
@@ -47,10 +51,9 @@ body {
   border: none;
 }
 
-#percentage {
+.operators {
   font-family: "Helvetica", "Arial";
   font-size: 18px;
-  grid-area: percentage;
 
   background-color: rgba(243, 243, 243, 0.952);
 
@@ -60,7 +63,7 @@ body {
   border: none;
 }
 
-#percentage:hover {
+.operators:hover {
   background-color: rgb(202, 202, 202);
   box-shadow: 1px 1px 1px grey;
 }
@@ -99,7 +102,6 @@ body {
 
 #backSpace {
   font-family: "Helvetica", "Arial";
-  font-size: 18px;
   grid-area: backSpace;
 
   background-color: rgba(243, 243, 243, 0.952);
@@ -114,343 +116,26 @@ body {
   box-shadow: 1px 1px 1px grey;
 }
 
-#reciprocal {
+.num {
+  font-family: "Helvetica", "Arial";
+  font-size: 19px;
+  font-weight: bold;
+
+  background-color: white;
+
+  border: none;
+}
+
+.num:hover {
+  background-color: rgb(202, 202, 202);
+  box-shadow: 1px 1px 1px grey;
+}
+
+.num[data-num~="."] {
   font-family: "Helvetica", "Arial";
   font-size: 18px;
-  grid-area: reciprocal;
 
   background-color: rgba(243, 243, 243, 0.952);
-
-  width: 100%;
-
-  border: none;
-}
-
-#reciprocal:hover {
-  background-color: rgb(202, 202, 202);
-  box-shadow: 1px 1px 1px grey;
-}
-
-#sqrd {
-  font-family: "Helvetica", "Arial";
-  font-size: 18px;
-  grid-area: sqrd;
-
-  background-color: rgba(243, 243, 243, 0.952);
-
-  width: 100%;
-
-  border: none;
-}
-
-#sqrd:hover {
-  background-color: rgb(202, 202, 202);
-  box-shadow: 1px 1px 1px grey;
-}
-
-#sqrt {
-  font-family: "Helvetica", "Arial";
-  font-size: 18px;
-  grid-area: sqrt;
-
-  background-color: rgba(243, 243, 243, 0.952);
-
-  width: 100%;
-
-  border: none;
-}
-
-#sqrt:hover {
-  background-color: rgb(202, 202, 202);
-  box-shadow: 1px 1px 1px grey;
-}
-
-#divide {
-  font-family: "Helvetica", "Arial";
-  font-size: 18px;
-  grid-area: divide;
-
-  background-color: rgba(243, 243, 243, 0.952);
-
-  width: 100%;
-
-  border: none;
-}
-
-#divide:hover {
-  background-color: rgb(202, 202, 202);
-  box-shadow: 1px 1px 1px grey;
-}
-
-#seven {
-  font-family: "Helvetica", "Arial";
-  font-size: 19px;
-  font-weight: bold;
-  grid-area: seven;
-
-  background-color: white;
-
-  width: 100%;
-
-  border: none;
-}
-
-#seven:hover {
-  background-color: rgb(202, 202, 202);
-  box-shadow: 1px 1px 1px grey;
-}
-
-#eight {
-  font-family: "Helvetica", "Arial";
-  font-size: 19px;
-  font-weight: bold;
-  grid-area: eight;
-
-  background-color: white;
-
-  width: 100%;
-
-  border: none;
-}
-
-#eight:hover {
-  background-color: rgb(202, 202, 202);
-  box-shadow: 1px 1px 1px grey;
-}
-
-#nine {
-  font-family: "Helvetica", "Arial";
-  font-size: 19px;
-  font-weight: bold;
-  grid-area: nine;
-
-  background-color: white;
-
-  width: 100%;
-
-  border: none;
-}
-
-#nine:hover {
-  background-color: rgb(202, 202, 202);
-  box-shadow: 1px 1px 1px grey;
-}
-
-#mult {
-  font-family: "Helvetica", "Arial";
-  font-size: 18px;
-  grid-area: mult;
-
-  background-color: rgba(243, 243, 243, 0.952);
-
-  width: 100%;
-
-  border: none;
-}
-
-#mult:hover {
-  background-color: rgb(202, 202, 202);
-  box-shadow: 1px 1px 1px grey;
-}
-
-#four {
-  font-family: "Helvetica", "Arial";
-  font-size: 19px;
-  font-weight: bold;
-  grid-area: four;
-
-  background-color: white;
-
-  width: 100%;
-
-  border: none;
-}
-
-#four:hover {
-  background-color: rgb(202, 202, 202);
-  box-shadow: 1px 1px 1px grey;
-}
-
-#five {
-  font-family: "Helvetica", "Arial";
-  font-size: 19px;
-  font-weight: bold;
-  grid-area: five;
-
-  background-color: white;
-
-  width: 100%;
-
-  border: none;
-}
-
-#five:hover {
-  background-color: rgb(202, 202, 202);
-  box-shadow: 1px 1px 1px grey;
-}
-
-#six {
-  font-family: "Helvetica", "Arial";
-  font-size: 19px;
-  font-weight: bold;
-  grid-area: six;
-
-  background-color: white;
-
-  width: 100%;
-
-  border: none;
-}
-
-#six:hover {
-  background-color: rgb(202, 202, 202);
-  box-shadow: 1px 1px 1px grey;
-}
-
-#minus {
-  font-family: "Helvetica", "Arial";
-  font-size: 18px;
-  grid-area: minus;
-
-  width: 100%;
-
-  background-color: rgba(243, 243, 243, 0.952);
-
-  border: none;
-}
-
-#minus:hover {
-  background-color: rgb(202, 202, 202);
-  box-shadow: 1px 1px 1px grey;
-}
-
-#one {
-  font-family: "Helvetica", "Arial";
-  font-size: 19px;
-  font-weight: bold;
-  grid-area: one;
-
-  width: 100%;
-
-  background-color: white;
-
-  border: none;
-}
-
-#one:hover {
-  background-color: rgb(202, 202, 202);
-  box-shadow: 1px 1px 1px grey;
-}
-
-#two {
-  font-family: "Helvetica", "Arial";
-  font-size: 19px;
-  font-weight: bold;
-  grid-area: two;
-
-  width: 100%;
-
-  background-color: white;
-
-  border: none;
-}
-
-#two:hover {
-  background-color: rgb(202, 202, 202);
-  box-shadow: 1px 1px 1px grey;
-}
-
-#three {
-  font-family: "Helvetica", "Arial";
-  font-size: 19px;
-  font-weight: bold;
-  grid-area: three;
-
-  width: 100%;
-
-  background-color: white;
-
-  border: none;
-}
-
-#three:hover {
-  background-color: rgb(202, 202, 202);
-  box-shadow: 1px 1px 1px grey;
-}
-
-#plus {
-  font-family: "Helvetica", "Arial";
-  grid-area: plus;
-
-  background-color: rgba(243, 243, 243, 0.952);
-
-  width: 100%;
-
-  border: none;
-}
-
-#plus:hover {
-  background-color: rgb(202, 202, 202);
-  box-shadow: 1px 1px 1px grey;
-}
-
-#negPos {
-  font-family: "Helvetica", "Arial";
-  font-size: 16px;
-  grid-area: negPos;
-
-  background-color: white;
-
-  width: 100%;
-
-  border: none;
-}
-
-#negPos:hover {
-  background-color: rgb(202, 202, 202);
-  box-shadow: 1px 1px 1px grey;
-}
-
-#zero {
-  font-family: "Helvetica", "Arial";
-  font-size: 19px;
-  font-weight: bold;
-  grid-area: zero;
-
-  background-color: white;
-
-  width: 100%;
-
-  border: none;
-}
-
-#zero:hover {
-  background-color: rgb(202, 202, 202);
-  box-shadow: 1px 1px 1px grey;
-}
-
-#decimal {
-  font-family: "Helvetica", "Arial";
-  font-size: 16px;
-  grid-area: decimal;
-
-  background-color: white;
-  width: 100%;
-
-  border: none;
-}
-
-#decimal:hover {
-  background-color: rgb(202, 202, 202);
-  box-shadow: 1px 1px 1px grey;
-}
-
-#equals {
-  font-family: "Helvetica", "Arial";
-  font-size: 18px;
-  grid-area: equals;
-
-  background-color: rgba(48, 161, 161, 0.596);
 
   width: 100%;
   height: 100%;
@@ -458,7 +143,18 @@ body {
   border: none;
 }
 
-#equals:hover {
-  background-color: rgb(37, 150, 190);
+.equals {
+  font-family: "Helvetica", "Arial";
+  font-size: 19px;
+  font-weight: bold;
+  grid-area: equals;
+
+  background-color: rgba(132, 187, 218, 0.918);
+
+  border: none;
+}
+
+.equals:hover {
+  background-color: rgba(48, 135, 185, 0.918);
   box-shadow: 1px 1px 1px grey;
 }
